@@ -1,18 +1,13 @@
 import tkinter as tk
 #import webbrowser
-
-
-
 from tkinter import Canvas
-
 
 class SimpleApp:
     def __init__(self, root):
         self.root = root
         self.root.title("shapes App")
         bg_color = "black"  # Hex color code for dark gray
-        self.root.configure(bg=bg_color)
-        
+        self.root.configure(bg=bg_color) 
         # Set initial geometry (widthxheight+X+Y)
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
@@ -22,7 +17,7 @@ class SimpleApp:
         # Set initial geometry and position the window
         self.root.geometry(f"1097x547+{x_coordinate}+{y_coordinate}")
         self.root.resizable(False,False)
-        
+        #canvas for corner design
         can1 = Canvas(width=100, height=100, bg="black", highlightthickness=0)
         can1.place(x=0,y=0)
         shape1={'bounds': [0, 100, 0, 0, 100, 0], 'kind': 'tri', 'fill': True}
@@ -42,7 +37,7 @@ class SimpleApp:
         can4.place(x=996,y=446)
         shape4={'bounds': [100, 0, 100, 100, 0, 100], 'kind': 'tri', 'fill': True}
         can4.create_polygon(list(shape4.values())[0],fill='green',outline='black')
-        #webbrowser.open("https://www.trulloy.com/")
+        #webbrowser.open("https://www.trulloy.com/")  when app run than first open any website
         
     
         
