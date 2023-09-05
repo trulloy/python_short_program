@@ -7,7 +7,7 @@ def send_email(sender_email, sender_password, receiver_email, subject, body):
     try:
         smtp_server = 'smtp.gmail.com'
         port = 587
-
+        
         server = smtplib.SMTP(smtp_server, port)
         server.starttls()
         server.login(sender_email, sender_password)
@@ -32,6 +32,7 @@ if __name__ == "__main__":
         sender_email = os.environ.get('SENDER_EMAIL')
         sender_password = os.environ.get('SENDER_PASSWORD')
         receiver_email = os.environ.get('RECEIVER_EMAIL')
+       
         subject = f"attendence for {[month]} {year}"
         body = f"Here's the attendence for {[month]} {year}:\n\n"
 
