@@ -6,7 +6,7 @@ class ImagePoint:
     x2: int = 0
     y2: int = 0
     
-    def __init__(self, x1, y1, x2, y2) -> None:
+    def __init__(self, x1, y1, x2, y2):
         self.x1 = x1
         self.x2 = x2
         self.y1 = y1
@@ -18,10 +18,12 @@ class ImagePoint:
     
     def isSingleColor(self, image: Image) -> bool:
         flag = True
-        self.myformatt()
-        previous_color = image.getpixel((self.x1, self.x2))
-        for i in range(self.x1, self.x2):
-            for j in range(self.y1, self.y2):
+        maxX = self.x2 - 1
+        maxY = self.y2 - 1
+        previous_color = image.getpixel((self.x1, self.y1))
+        
+        for i in range(self.x1, maxX):
+            for j in range(self.y1, maxY):
                 current_color = image.getpixel((i,j))
                 if (previous_color == current_color):
                     flag = True
@@ -37,9 +39,15 @@ class ImagePoint:
             return False
         
     def myformatt(self):
-        print("Point[",self.x1,self.x2,self.y1,self.y2,"]")
+        return "Point[" + str(self.x1) + ", " + str(self.x2) + ", " + str(self.y1) + ", "  + str(self.y2) + "]"
+    
+    def printPixelColor(self, image:Image):
+        flag = True
+        maxX = self.x2 - 1
+        maxY = self.y2 - 1
+        previous_color = image.getpixel((0, 0))
         
-    @classmethod
-    @staticmethod
-    def checkException(img:Image, x, y):
-        img.getpixel((x, y))
+        for i in range(self.x1, maxX):
+            for j in range(self.y1, maxY):
+                current_color = image.getpixel((i,j))
+                print(i,j, " ->", current_color)
