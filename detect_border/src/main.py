@@ -1,6 +1,16 @@
+#############################################################
+#############################################################     
+##                                                         ##
+## Reserved by © Trulloy IT (trulloy.com)                  ##
+## 1) Developer : Amit Kumar Giri (allyamit@gmail.com)     ##
+## 2) Developer : Het Olakiya                              ##
+##                                                         ##
+##  Since: 25 Sept 2023                                    ##
+#############################################################
+#############################################################
+
 from PIL import Image
 from ImagePoint import ImagePoint
-import time
 from pathlib import Path
 import shutil
 import os
@@ -37,6 +47,5 @@ for obj in list:
     rgb_im.save("output/img_" + str(a) + '.jpg')
     cropImage.close()
     a = a + 1
-
 
 image.close()

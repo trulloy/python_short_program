@@ -1,5 +1,15 @@
-from PIL import Image
+#############################################################
+#############################################################     
+##                                                         ##
+## Reserved by © Trulloy IT (trulloy.com)                  ##
+## 1) Developer : Amit Kumar Giri (allyamit@gmail.com)     ##
+## 2) Developer : Het Olakiya                              ##
+##                                                         ##
+##  Since: 25 Sept 2023                                    ##
+#############################################################
+#############################################################
 
+from PIL import Image
 class ImagePoint:
     x1: int = 0
     y1: int = 0
@@ -17,6 +27,28 @@ class ImagePoint:
         return s
     
     def isSingleColor(self, image: Image) -> bool:
+        flag = True
+        maxX = self.x2 - 1
+        maxY = self.y2 - 1
+        previous_color = image.getpixel((self.x1, self.y1))
+        
+        for i in range(self.x1, maxX):
+            for j in range(self.y1, maxY):
+                current_color = image.getpixel((i,j))
+                if (previous_color == current_color):
+                    flag = True
+                else:
+                    flag = False
+                    break
+                previous_color = current_color
+            if (flag == False):
+                break
+        if (flag):
+            return True
+        else:
+            return False
+        
+    def copyPixels(self, image: Image) -> bool:
         flag = True
         maxX = self.x2 - 1
         maxY = self.y2 - 1
