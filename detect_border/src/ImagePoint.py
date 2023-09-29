@@ -48,28 +48,6 @@ class ImagePoint:
         else:
             return False
         
-    def copyPixels(self, image: Image) -> bool:
-        flag = True
-        maxX = self.x2 - 1
-        maxY = self.y2 - 1
-        previous_color = image.getpixel((self.x1, self.y1))
-        
-        for i in range(self.x1, maxX):
-            for j in range(self.y1, maxY):
-                current_color = image.getpixel((i,j))
-                if (previous_color == current_color):
-                    flag = True
-                else:
-                    flag = False
-                    break
-                previous_color = current_color
-            if (flag == False):
-                break
-        if (flag):
-            return True
-        else:
-            return False
-        
     def myformatt(self):
         return "Point[" + str(self.x1) + ", " + str(self.x2) + ", " + str(self.y1) + ", "  + str(self.y2) + "]"
     
