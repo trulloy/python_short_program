@@ -1,9 +1,9 @@
 #############################################################
 #############################################################     
 ##                                                         ##
-## Reserved by © Trulloy IT (trulloy.com)                  ##
-## 1) Developer : Amit Kumar Giri (allyamit@gmail.com)     ##
-## 2) Developer : Het Olakiya                              ##
+##  Reserved by © Trulloy IT (trulloy.com)                 ##
+##  1) Developer : Amit Kumar Giri (allyamit@gmail.com)    ##
+##  2) Developer : Het Olakiya (olakiyahet@gmail.com)      ##
 ##                                                         ##
 ##  Since: 25 Sept 2023                                    ##
 #############################################################

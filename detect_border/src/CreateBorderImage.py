@@ -1,9 +1,9 @@
 #############################################################
 #############################################################     
 ##                                                         ##
-## Reserved by © Trulloy IT (trulloy.com)                  ##
-## 1) Developer : Amit Kumar Giri (allyamit@gmail.com)     ##
-## 2) Developer : Het Olakiya                              ##
+##  Reserved by © Trulloy IT (trulloy.com)                 ##
+##  1) Developer : Amit Kumar Giri (allyamit@gmail.com)    ##
+##  2) Developer : Het Olakiya (olakiyahet@gmail.com)      ##
 ##                                                         ##
 ##  Since: 25 Sept 2023                                    ##
 #############################################################
@@ -15,6 +15,7 @@ from ImagePoint import ImagePoint
 from pathlib import Path
 import shutil
 import os
+import sys
 
 class CreateBorderImage:
      
@@ -42,9 +43,12 @@ class CreateBorderImage:
         self.processImage = Image.open("output/tempImg.jpg")
         self.pixel_map = self.processImage.load()
         
-    def process(self) -> None:
+    def process(self, type:int) -> None:
         '''Write the logic here'''
         width, height = self.realImage.size
+        maxPixelCount = width * height
+        print("Percent = ")
+        print('\033[?25l', end="")
         for y in range(0, height, self.sizeOfPixel):
             for x in range(0, width, self.sizeOfPixel):
                 xSize = x + self.sizeOfPixel
@@ -52,7 +56,16 @@ class CreateBorderImage:
                 if width > xSize and height > ySize:
                     img = ImagePoint(x, y, xSize, ySize)
                     if not img.isSingleColor(self.realImage):
-                        self.copyPixels(img)
+                        if type == 1:
+                            self.copyPixels(img)
+                        elif type == 2:
+                            self.createBlackAndWhiteImgage(img)
+                        else:
+                            print("Please select type for image [1,2]")
+                            return
+            percent = ((x * y) * 100) / maxPixelCount
+            print(int(percent), end='\r')
+            sys.stdout.flush()
 
         rgb_im = self.processImage.convert('RGB')
         rgb_im.save("output/borderscale.jpg")
@@ -67,14 +80,34 @@ class CreateBorderImage:
         #     cropImage.close()
         #     a = a + 1
 
-    def copyPixels(self, box: ImagePoint) -> bool:
-        maxX = box.x2 - 1
-        maxY = box.y2 - 1
-        
+    def copyPixels(self, box: ImagePoint) -> None:
+        maxX = box.x2
+        maxY = box.y2
+        Black = False 
+    
         for i in range(box.x1, maxX):
             for j in range(box.y1, maxY):
                 r, g, b = self.realImage.getpixel((i, j))
                 self.pixel_map[i, j] = (r, g, b)
+                    
+    def createBlackAndWhiteImgage(self, box: ImagePoint) -> None:
+        maxX = box.x2
+        maxY = box.y2
+        Black = False 
+    
+        for i in range(box.x1, maxX):
+            for j in range(box.y1, maxY):
+                r, g, b = self.realImage.getpixel((i, j))
+                if (r, g, b) == (0, 0, 0):
+                    Black = True
+                else:
+                    r, g, b = 255, 255, 255
+                self.pixel_map[i, j] = (r, g, b)
+        if not Black:
+            for i in range(box.x1, maxX):
+                for j in range(box.y1, maxY):
+                    self.pixel_map[i, j] = (255, 255, 255)
+
         
     def __del__(self):
         self.realImage.close()
